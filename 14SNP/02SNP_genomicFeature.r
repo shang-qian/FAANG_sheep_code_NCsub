@@ -19,7 +19,6 @@ genome_gr <- GRanges(
   ranges = IRanges(start = 1, end = chrom_lengths$end)
 )
 
-
 # 筛选基因或转录本注释
 genes <- gff_data[gff_data$type %in% c("gene")|gff_data$type %in% c("pseudogene")]
 Gene_data <- data.frame(  seqnames = seqnames(genes),  start = start(genes),  end = end(genes),  strand = strand(genes),  geneID = mcols(genes)$ID  )
@@ -77,10 +76,6 @@ intergenic_regions <- setdiff(intergenic_regions_step2, genhancer_gr)
 intergenic_regions
 
 
-
-
-
-
 #SNP
 SNP_df <- read.table("~/FAANG/analysis/13SNP/02New/01SNP_position_chr_all.bed", header = F, sep = "\t")
 # 建立替换列表
@@ -101,8 +96,6 @@ SNP_df$V1 <- unname(chr_map[SNP_df$V1])
 SNP_gr= GRanges(seqnames = SNP_df$V1,  ranges = IRanges(start = SNP_df$V2, end = SNP_df$V3),  SNPname = SNP_df$V4, SNPID= SNP_df$V5)
 
 write.table(as.data.frame(SNP_df), file = paste0("00SNP_all577834.txt"), sep = "\t", row.names = T, col.names = T, quote = FALSE)
-
-
 
 
 SNP_den=function(SNP_gr,enhancer_gr)
